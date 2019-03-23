@@ -1,15 +1,16 @@
+--- 
+addons: 
+  apt: 
+    packages: 
+      - openjdk-8-jdk
+app: sia-5
+before_install: 
+  - "chmod +x mvnw"
+deploy: 
+  api-key: 
+    secure: $HEROKU_API_KEY
+  provider: heroku
+dist: trusty
+jdk: openjdk8
 language: java
 sudo: true
-dist: trusty
-jdk: openjdk8 
-addons:
-  apt:
-    packages:
-      - openjdk-8-jdk
-before_install:
-  - chmod +x mvnw
-deploy:
-  provider: heroku
-  api-key:
-    secure: $HEROKU_API_KEY
- app: sia-5
