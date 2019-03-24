@@ -1,18 +1,12 @@
 body {
-	font-family: Arial;
-	font-size: 0.8em;
+
 }
 
 div.ingredient-group {
-	border: solid 1px #CCC;
-	display: inline-block;
-	padding: 2pt;
-}
 
-button {
-	background: green;
 }
 
 span.validationError {
 	color: red;
+	display: inline-block;
 }
