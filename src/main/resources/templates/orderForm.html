@@ -2,53 +2,130 @@
 <html>
 <head>
 <title>Order page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" th:href="@{/styles.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form method="POST" th:action="@{/orders}" th:object="${order}">
-		<h1>Order your Taco creations now!</h1>
-		<img th:src="@{/images/icon.png}" />
+	<div class="container">
 
+		<form method="POST" th:action="@{/orders}" th:object="${order}" novalidate>
 
-		<divth:if"${#fields.hasErrors()}">
-			<span class="validationError"> Please correct the errors below
-				and resubmit. </span>
+			<!--  BEGIN ROW 1 -->
+			<div class="row">
+				<div class="col text-center">
+					<h1>Design your Taco!</h1>
+					<img th:src="@{/images/icon.jpg}" /><br /> <br />
+				</div>
 			</div>
-			<h3>Deliver my taco masterpieces to...</h3>
-			<label for="name">Name: </label>
-			<input type="text" th:field="*{name}" />
-			<br />
-
-			<label for="street">Street address: </label>
-			<input type="text" th:field="*{street}" />
-			<br />
-
-			<label for="city">City: </label>
-			<input type="text" th:field="*{city}" />
-			<br />
-
-			<label for="state">State: </label>
-			<input type="text" th:field="*{state}" />
-			<br />
-
-			<label for="zip">Zip code: </label>
-			<input type="text" th:field="*{zip}" />
-			<br />
-
+			<!-- END ROW 1 -->
+			<!-- BEGIN ERROR ROW -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+						<span th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}" class="d-block">There is some
+							error in 'name' field.</span>
+							
+						<span th:if="${#fields.hasErrors('street')}"
+							th:errors="*{street}" class="d-block">There is some error in
+							'street' field.</span>
+							
+						<span th:if="${#fields.hasErrors('city')}"
+							th:errors="*{city}" class="d-block">There is some error in
+							'city' field.</span>
+							
+						<span th:if="${#fields.hasErrors('state')}"
+							th:errors="*{state}" class="d-block">There is some error in
+							'state' field.</span>
+							
+						<span th:if="${#fields.hasErrors('zip')}"
+							th:errors="*{zip}" class="d-block">There is some error in
+							'zip' field.</span>
+							
+						<span th:if="${#fields.hasErrors('ccNumber')}"
+							th:errors="*{ccNumber}" class="d-block">There is some error in
+							'ccNumber' field.</span>
+							
+						<span th:if="${#fields.hasErrors('ccExpiration')}"
+							th:errors="*{ccExpiration}" class="d-block">There is some error in
+							'ccExpiration' field.</span>
+							
+						<span th:if="${#fields.hasErrors('ccCVV')}"
+							th:errors="*{ccCVV}" class="d-block">There is some error in
+							'ccCVV' field.</span>	
+					</div>
+				</div>
+			</div>
+			<!-- END ERROR ROW -->
+			<h3>Delivery address</h3>
+			<div class="form-group row">
+				<label for="name" class="col-sm-2 col-form-label">Name</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="name"
+						placeholder="Enter name" th:field="*{name}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="street" class="col-sm-2 col-form-label">Street address</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="street"
+						placeholder="Street" th:field="*{street}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="city" class="col-sm-2 col-form-label">City</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="city"
+						placeholder="City" th:field="*{city}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="state" class="col-sm-2 col-form-label">State</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="state"
+						placeholder="State" th:field="*{state}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="zip" class="col-sm-2 col-form-label">Zip Code</label>
+				<div class="col-sm-2">
+					<input type="text" pattern="[0-9]{5}" class="form-control" id="zip"
+						placeholder="12345" th:field="*{zip}">
+				</div>
+			</div>	
 			<h3>Here's how I'll pay...</h3>
-			<label for="ccNumber">Credit Card #: </label>
-			<input type="text" th:field="*{ccNumber}" />
-			<br />
+			<div class="form-group row">
+				<label for="ccNumber" class="col-sm-2 col-form-label">Credit Card #:</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="ccNumber"
+						placeholder="Credit card #" th:field="*{ccNumber}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ccExpiration" class="col-sm-2 col-form-label">Expiration:</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="ccExpiration"
+						placeholder="MM/YY" th:field="*{ccExpiration}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ccCVV" class="col-sm-2 col-form-label">CVV</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="ccCVV"
+						placeholder="CVV" th:field="*{ccCVV}">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
 
-			<label for="ccExpiration">Expiration: </label>
-			<input type="text" th:field="*{ccExpiration}" />
-			<br />
-
-			<label for="ccCVV">CVV: </label>
-			<input type="text" th:field="*{ccCVV}" />
-			<br />
-
-			<input type="submit" value="Submit order" />
-	</form>
+	</div>
+	<!-- container -->
 </body>
 </html>

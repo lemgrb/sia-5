@@ -15,29 +15,27 @@
 
 	<div class="container">
 		<div class="row">
-
 			<div class="col text-center">
 				<h1>Design your Taco!</h1>
-				<img th:src="@{/images/icon.jpg}" />
+				<img th:src="@{/images/icon.jpg}" /><br /><br />
 			</div>
 		</div>
 		<form method="POST" th:object="${design}">
 			<div class="row">
 				<div class="col-sm-12">
-				<div class="alert alert-danger"
-					th:if="${#fields.hasErrors('ingredients')}"
-					th:errors="*{ingredients}">Ingredient Error</div>
+					<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+						<span th:if="${#fields.hasErrors('ingredients')}"
+							th:errors="*{ingredients}" class="d-block">There is some error in
+							'ingredients' field.</span>
+						<span th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}" class="d-block">There is some error in 'name' field.</span>
 					</div>
-					<div class="col-sm-12">
-				<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
-					th:errors="*{name}">name error</div>
-					</div>
+				</div>
 			</div>
 			<div class="row">
 				<!--  TACO NAME -->
 				<div class="col-12"></div>
 				<div class="col-12">
-
 					<div class="form-group col-sm-4">
 						<label for="name">Name your Taco</label> <input type="text"
 							class="form-control" th:field="*{name}" id="name">
